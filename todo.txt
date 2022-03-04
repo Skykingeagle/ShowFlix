@@ -1,0 +1,5 @@
+- Search button     [done]
+- Censor            [done]
+- Forgot Password
+- Edit & Delete
+- Share             [done]

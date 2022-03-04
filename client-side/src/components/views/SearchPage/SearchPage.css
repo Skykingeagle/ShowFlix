@@ -1,0 +1,9 @@
+.search_container {
+    background: #fff;
+    padding: 20px 10px;
+    cursor: pointer;
+}
+.search_container:hover {
+    background: #f5f5f5;
+    color: #0099ff;
+}
