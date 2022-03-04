@@ -12,5 +12,5 @@ This is a movie reivew web app built using React, Node.js, MongoDB, TMDB API.
 # How to Use
 1. make dev.js file inside config folder.
 2. put mongoDB information into dev.js file.
-3. Type `npm install` inside the server directory (root).
-4. Type `npm install` inside the client directory (Front-end).
+3. Type `npm install` inside the server-side directory (root).
+4. Type `npm install` inside the client-side directory (Front-end).
