@@ -32,13 +32,16 @@ router.post("/getComments", (req, res) => {
     });
 });
 
-router.post("/deleteComment", (req, res) => {
-  console.log(req.body);
+// To Update the comment
+// router.put("/updateComment", async(req,res)=>{
 
-  Comment.findByIdAndDelete(req.body.commentId, (err, doc) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, doc });
-    console.log("DELETE removing ID: " + doc);
-  });
+// })
+
+// To Delete the comment
+router.delete("/deleteComment", async(req, res) => {
+  console.log(req.body);
+  const id = req.body.commentId;
+  const repo = await Comment.findByIdDelete(id);
+  res.status(200).json({success: true});
 });
 module.exports = router;
