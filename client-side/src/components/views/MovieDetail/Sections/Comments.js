@@ -57,7 +57,9 @@ function Comments(props) {
               <React.Fragment>
                 <SingleComment
                   comment={comment}
+                  setCommentLists={props.setCommentLists}
                   postId={props.postId}
+                  movieVariable={props.movieVariable}
                   refreshFunction={props.refreshFunction}
                   replyComment={props.replyComment}
                 />

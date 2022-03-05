@@ -43,7 +43,7 @@ function SingleComment(props) {
     });
   };
 
-  const onDelete = (e) => {
+  const onDelete = async (e) => {
     const variables = {
       writer: user.userData._id,
       postId: props.postId,
@@ -51,13 +51,33 @@ function SingleComment(props) {
       content: CommentValue,
       replyComment: commentNum,
     };
+    console.log(variables);
     const checkwriter = props.comment.writer._id;
     console.log(checkwriter);
 
     if (variables.replyComment === 0) {
       if (checkwriter === variables.writer) {
-        Axios.post("/api/comment/deleteComment", variables).then((response) => {
-          props.refreshFunction(response.data.result);
+        // Axios.delete(`/api/comment/deleteComment/${props.comment._id}`, variables).then((response) => {
+        //   props.refreshFunction(response.data.result);
+        // });
+
+        const repo = await fetch(`/api/comment/deleteComment/${props.comment._id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+
+        console.log(repo);
+
+        Axios.post("/api/comment/getComments", props.movieVariable).then((response) => {
+          console.log(response);
+          if (response.data.success) {
+            console.log("response.data.comments", response.data.comments);
+            props.setCommentLists(response.data.comments);
+          } else {
+            alert("Failed to get comments Info");
+          }
         });
       } else {
         alert("Invalid User: failed to delete the comment.");

@@ -132,6 +132,8 @@ function MovieDetail(props) {
         <Comment
           title={Movie.original_title}
           CommentLists={CommentLists}
+          movieVariable={movieVariable}
+          setCommentLists={setCommentLists}
           postId={movieId}
           refreshFunction={updateComment}
         />

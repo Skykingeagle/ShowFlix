@@ -38,10 +38,10 @@ router.post("/getComments", (req, res) => {
 // })
 
 // To Delete the comment
-router.delete("/deleteComment", async(req, res) => {
-  console.log(req.body);
-  const id = req.body.commentId;
-  const repo = await Comment.findByIdDelete(id);
+router.delete("/deleteComment/:id", async(req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  const repo = await Comment.findByIdAndDelete(id);
   res.status(200).json({success: true});
 });
 module.exports = router;
