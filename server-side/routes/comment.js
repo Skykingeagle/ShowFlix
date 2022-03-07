@@ -5,7 +5,7 @@ const { auth } = require("../middleware/auth");
 const censor = require("text-censor");
 
 router.post("/saveComment", auth, (req, res) => {
-  const filter = censor.filter(req.body.content, (err, censored) => censored)
+  const filter = censor.filter(req.body.content, (err, censored) => censored);
   req.body.content = filter;
   const comment = new Comment(req.body);
 
@@ -20,7 +20,6 @@ router.post("/saveComment", auth, (req, res) => {
         return res.status(200).json({ success: true, result });
       });
   });
-  
 });
 
 router.post("/getComments", (req, res) => {
@@ -33,15 +32,22 @@ router.post("/getComments", (req, res) => {
 });
 
 // To Update the comment
-// router.put("/updateComment", async(req,res)=>{
+router.put("/updateComment/:id", async (req, res) => {
+  const comment = req.body.updateComment;
+  console.log(comment);
+  const repo = await Comment.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: { content: comment } }
+  );
 
-// })
+  res.status(200).json({ success: true });
+});
 
 // To Delete the comment
-router.delete("/deleteComment/:id", async(req, res) => {
+router.delete("/deleteComment/:id", async (req, res) => {
   console.log(req.params.id);
   const id = req.params.id;
   const repo = await Comment.findByIdAndDelete(id);
-  res.status(200).json({success: true});
+  res.status(200).json({ success: true });
 });
 module.exports = router;
