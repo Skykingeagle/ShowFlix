@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tooltip, Icon } from "antd";
 import Axios from "axios";
 import { useSelector } from "react-redux";
+import analysisContext from "../../../../context/analysisContext";
 
 function LikeDislikes(props) {
   const user = useSelector((state) => state.user);
+
+  const analysisCon = useContext(analysisContext);
+  const { setNoOfDislikes, setNoOfLikes } = analysisCon;
 
   const [Likes, setLikes] = useState(0);
   const [Dislikes, setDislikes] = useState(0);
@@ -21,7 +25,6 @@ function LikeDislikes(props) {
   useEffect(() => {
     Axios.post("/api/like/getLikes", variable).then((response) => {
       console.log("getLikes", response.data);
-
       if (response.data.success) {
         //How many likes does this video or comment have
         setLikes(response.data.likes.length);
@@ -54,6 +57,13 @@ function LikeDislikes(props) {
       }
     });
   }, []);
+
+  useEffect(()=>{
+    setNoOfLikes(prevNoOfLikes => prevNoOfLikes+Likes);
+    setNoOfDislikes(prevNoOfDislikes => prevNoOfDislikes+Dislikes);
+    console.log("1=",Likes);
+    console.log("2=",Dislikes);
+  },[Likes,Dislikes])
 
   const onLike = () => {
     if (user.userData && !user.userData.isAuth) {

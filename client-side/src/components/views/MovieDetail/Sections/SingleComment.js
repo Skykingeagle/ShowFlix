@@ -110,29 +110,36 @@ function SingleComment(props) {
     </div>,
 
     <div>
-      <Button onClick={()=>{
-        setModalIsOpen(true);
-      }}>Edit</Button>
+      <Button
+        onClick={() => {
+          setModalIsOpen(true);
+        }}
+      >
+        Edit
+      </Button>
     </div>,
   ];
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [updateComment, setUpdateComment] = useState(`${props.comment.content}`);
+  const [updateComment, setUpdateComment] = useState(
+    `${props.comment.content}`
+  );
 
-  const onChange = e =>{
+  const onChange = (e) => {
     setUpdateComment(e.target.value);
-  }
+  };
 
-  const UpdateComment = async(e) =>{
-    const repo = await fetch(`/api/comment/updateComment/${props.comment._id}`,
+  const UpdateComment = async (e) => {
+    const repo = await fetch(
+      `/api/comment/updateComment/${props.comment._id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({updateComment})
+        body: JSON.stringify({ updateComment }),
       }
-    )
+    );
 
     console.log(repo);
 
@@ -149,12 +156,10 @@ function SingleComment(props) {
     );
 
     setModalIsOpen(false);
-
-  }
+  };
 
   return (
     <div>
-      
       <Comment
         actions={actions}
         author={props.comment.writer.name}
@@ -167,22 +172,39 @@ function SingleComment(props) {
         isOpen={modalIsOpen}
         style={{
           overlay: {
-            backgroundColor: 'rgba(115,115,115,0.2)',
+            backgroundColor: "rgba(115,115,115,0.2)",
           },
           content: {
-            width: '20rem',
-            marginTop: '10%',
-            marginLeft: '35%',
-            height: '350px'
-          }
+            width: "20rem",
+            marginTop: "10%",
+            marginLeft: "35%",
+            height: "350px",
+          },
         }}
       >
-        <button onClick={()=>{setModalIsOpen(false)}}>close</button>
+        <button
+          onClick={() => {
+            setModalIsOpen(false);
+          }}
+        >
+          close
+        </button>
         <form>
-          <input name="updateComment" value={updateComment} onChange={onChange} />
+          <input
+            name="updateComment"
+            value={updateComment}
+            onChange={onChange}
+          />
           <hr />
           {/* Thik kar lena */}
-          <Button style={{width:'80%', height:'52px'}} onClick={()=>{UpdateComment()}}>Update Comment</Button>
+          <Button
+            style={{ width: "80%", height: "52px" }}
+            onClick={() => {
+              UpdateComment();
+            }}
+          >
+            Update Comment
+          </Button>
         </form>
       </Modal>
 

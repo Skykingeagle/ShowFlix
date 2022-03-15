@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainImage from "../Commons/MainImage";
 import MovieInfo from "./Sections/MovieInfo";
 import { API_URL, API_KEY, IMAGE_BASE_URL, POSTER_SIZE } from "../../Config";
@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import Title from "antd/lib/typography/Title";
 import { Grid } from "@material-ui/core";
+import DoughnutChart from "./Charts/DoughnutChart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     backgroundColor: theme.palette.background.paper,
     marginLeft: "10vw",
-    width: "80vw"
+    width: "80vw",
   },
   gridList: {
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
-  }
+    transform: "translateZ(0)",
+  },
 }));
 
 function MovieDetail(props) {
@@ -35,8 +36,9 @@ function MovieDetail(props) {
   const [Movie, setMovie] = useState([]);
   const [Casts, setCasts] = useState([]);
   const [CommentLists, setCommentLists] = useState([]);
+
   const movieVariable = {
-    movieId: movieId
+    movieId: movieId,
   };
   const classes = useStyles();
 
@@ -48,21 +50,21 @@ function MovieDetail(props) {
     fetch(endpointInfo)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setMovie(response);
       });
 
     fetch(endpointCrew)
       .then((response) => response.json())
       .then((response) => {
-        console.log("responseForCrew", response);
+        // console.log("responseForCrew", response);
         setCasts(response.cast);
       });
 
     Axios.post("/api/comment/getComments", movieVariable).then((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.data.success) {
-        console.log("response.data.comments", response.data.comments);
+        // console.log("response.data.comments", response.data.comments);
         setCommentLists(response.data.comments);
       } else {
         alert("Failed to get comments Info");
@@ -88,7 +90,7 @@ function MovieDetail(props) {
           style={{
             display: "flex",
             justifyContent: "flex-end",
-            marginRight: "1rem"
+            marginRight: "1rem",
           }}
         >
           <Favorite
@@ -126,6 +128,8 @@ function MovieDetail(props) {
             )}
         </Grid>
       </div>
+
+      <DoughnutChart CommentLists={CommentLists} />
 
       <div style={{ marginLeft: "5vw", width: "90vw" }}>
         {/* Comments */}

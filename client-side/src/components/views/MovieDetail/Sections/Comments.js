@@ -58,6 +58,8 @@ function Comments(props) {
                 <SingleComment
                   comment={comment}
                   setCommentLists={props.setCommentLists}
+                  setNoOfDislikes={props.setNoOfDislikes}
+                  setNoOfLikes={props.setNoOfLikes}
                   postId={props.postId}
                   movieVariable={props.movieVariable}
                   refreshFunction={props.refreshFunction}
