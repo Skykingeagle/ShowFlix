@@ -3,6 +3,12 @@ const router = express.Router();
 const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
+const otpGenerator = require('otp-generator');
+const nodemailer = require('../config/nodemailer.config');
+
+const bcrypt = require("bcrypt");
+// The numebr of letters to encrypt
+const saltRounds = 10;
 
 router.get("/auth", auth, (req, res) => {
   res.status(200).json({
@@ -24,6 +30,7 @@ router.post("/register", (req, res) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
       success: true,
+      pass: user.password
     });
   });
 });
@@ -64,5 +71,43 @@ router.get("/logout", auth, (req, res) => {
     }
   );
 });
+
+router.post('/getOTP', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(400).json({ success: false, message: 'Wrong credential' })
+    }
+    const OTP = otpGenerator.generate(6, {
+      upperCaseAlphabets: true,
+      specialChars: true,
+    });
+    nodemailer.sendConfirmationEmail(req.body.email, req.body.email, OTP);
+    res.status(200).send({ success: true, OTP });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Some error' })
+  }
+})
+
+router.put('/changePass', async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(400).json({ success: false, message: 'Wrong credential' })
+    }
+    user.password = req.body.password
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      bcrypt.hash(user.password, salt, async(err, hash) =>{
+        if(err){
+          res.status(400).json({ success: false, message: err })
+        }
+        user = await User.findOneAndUpdate({ email: req.body.email }, { $set: { password: hash } });
+        return res.status(200).json({success:true, pass: user.password})
+      });
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Some error' })
+  }
+})
 
 module.exports = router;
