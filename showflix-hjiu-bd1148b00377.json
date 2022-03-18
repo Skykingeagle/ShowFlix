@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "showflix-hjiu",
+  "private_key_id": "bd1148b003779c6c7b80f5c7c741eb87bae7d97c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC5Z8eQzDApRYhd\nYZMXC7EvtEcmYQC87GLOOshoUYiwrJHFC11p/5SneBOJJSIWa8bnXSHWjmwIti/k\nw+RaHEEvgPEqO8ykFirEDbW0m1HQCl88/a4lNwRq6e0FL0FfApjEYnONADm/65TP\nlgfwkjsagEiKz/PdcxaS/9NMHJpkBUDZggyvLhvAgUE9hL88i6azekZUP4/yQm7R\nDwxY4Vmt1ldnWemv/Vdq5lsIXNJSUfXIMiQKdYCNCqtYANAZlps9DLobb6BKPZT7\nSx+jaAx9mvrcpBn1szsdXcQo7TBFGaD5BQlHGhk2gCYnG+9ZNLpLgcVA3y32jvVa\nUyeDD/i5AgMBAAECggEAAlR5jF1+JXNuphQtCXC0k1YZDTRrq/QhWCVVxQNxS+pM\nEqvbF3mGYFLNlaWjBG3qTzIIBztwkO0Pmp8tMxMaOc/Na0VBHYOVAGdW5z2+DRB0\nTfHqMSS8QeCBGzv5MfASBDXKIFvmXeRG0UagM7fCu/yGU0HcKkyt9fIp5GtfmiFc\nfkirMp1PA73VSDmxRycCBk53/b1/sKpdQ6tokxwGHa6fmF3BYhdfviJ+Qd+NKTf8\nUM/dJFMJk1UXC6hIWbiuEYMMG750Ma1PWK8McfGCPRty2vt1P06ltmWGeHXT+QYN\nFxiYV3Qsact0j56Abx4ZwZy5R+0/qKmnAq4qAQgMmQKBgQDfBKMot//Xcz+oQyMy\nT6O74TSOnjJiB4ZPFzrFnkP36FNc/GfPWFdqGr7ENUFDrQkKq0qFkre71kvrR3RM\nXX1fTAyPkjsHA6tnc/5pLNE+gV6+8jQs6Yqxea8Nvf4iq9gaCKrsOQS8X9T4+fp8\nKkFAtEbkthDNUz9sHRAE4dFU9wKBgQDU0yRN/rtf8zmSHyENWLzH+QjzczHo/F+E\nrFEHp+c6M3CtZa1M/kRA5Iix8IJuc/EJM7nhDSIC46u7+mC/SePWLZOeKulFzt5y\nyJNbBPa7hFoV3EpOaRE4IEBotu6rfAfNM/ZTP6f9286f+VOp4jI9YP8LW+SDWqqG\nRrgq9iWjzwKBgQCYwDxgr2Z002NOhG2fEB09mkq9RG2N50l+8pI2uOgk7OPsVJVl\n10RIUHlJOpCxIduHiztHse5WobjuNcraY05z70rLK4VykHjeKvyeXSwUe9fBQXOr\nL2rnlEjqSK/AX6NscXNgyM0NmTXuMon2cZqwDspf7LQlbleKXX2TWnhekQKBgGZ2\nQMRMH2nSb6Up13/VeQ3Nl8GddCn3VwVI8Ln+3BPpMBZLHWQ0Big33pfMcv86UpFb\nleIDsJwzgDrAEFQH/ujeiHNdtXEmZ3JbnpXzjdY5oiVkKWIWs3OSE3BWohFtZVQl\n8DGkM/zEFnZuUxk3DXj/ecq+MwYKYI7E/WWxm+2BAoGBAK3I2kraNae37hhEnn/a\nB+u7sjMOSzpDB+LXdAzWxCT8IAxA6yIA4h9rjSLrY16cMejowfTx+TAHHSikY07E\n4y2+EBqcGLgnyptqZi8AodrwMKKxcm+l54I23hzPFcQQ1lx6LMEAyVkLE9W6P9kA\nn6RtPaXKYcYq8W15dT0kVvWC\n-----END PRIVATE KEY-----\n",
+  "client_email": "showflix@showflix-hjiu.iam.gserviceaccount.com",
+  "client_id": "103040756965049489416",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/showflix%40showflix-hjiu.iam.gserviceaccount.com"
+}

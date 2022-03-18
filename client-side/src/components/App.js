@@ -12,6 +12,7 @@ import MovieDetail from "./views/MovieDetail/MovieDetail";
 import ProfilePage from "./views/ProfilePage/ProfilePage";
 import ActorPage from "./views/ActorPage";
 import AnalysisState from "../context/AnalysisState";
+import Chat from "../components/Chat";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -45,6 +46,7 @@ function App() {
             />
           </Switch>
         </div>
+        <Chat/>
         <Footer />
       </Suspense>
     </AnalysisState>
