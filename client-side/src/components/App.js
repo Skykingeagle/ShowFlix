@@ -14,6 +14,7 @@ import ActorPage from "./views/ActorPage";
 import AnalysisState from "../context/AnalysisState";
 import Chat from "../components/Chat";
 import ForgotPasswordPage from "./views/ForgotPasswordPage";
+import ResetPasswordPage from "./views/ResetPasswordPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -37,7 +38,7 @@ function App() {
             <Route
               exact
               path='/login/reset'
-              component={Auth(ForgotPasswordPage, false)}
+              component={Auth(ResetPasswordPage, false)}
             />
             <Route
               exact

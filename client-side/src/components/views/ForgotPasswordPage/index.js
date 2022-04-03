@@ -23,7 +23,7 @@ const ForgotPasswordPage = () => {
         console.log("OTP Confirmed", values);
         setSubmitting(false);
 
-        history.push("/reset");
+        history.push("/login/reset");
       }}
     >
       {({
