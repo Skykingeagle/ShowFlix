@@ -1,13 +1,23 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "antd/lib/typography/Title";
-import { Button, Form, Icon, Input } from "antd";
+import { Button, Form, Icon, Input, notification } from "antd";
 import { useHistory } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
   const history = useHistory();
   const [isOTPSent, setIsOTPSent] = useState(false);
+
+  useEffect(() => {
+    if (isOTPSent) {
+      notification.success({
+        message: "OTP Sent",
+        description:
+          "OTP to reset your password is sent successfully! Please check your email"
+      });
+    }
+  }, [isOTPSent]);
 
   return isOTPSent ? (
     <Formik

@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Title from "antd/lib/typography/Title";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import { useHistory } from "react-router-dom";
 
 const formItemLayout = {
@@ -31,6 +31,13 @@ const tailFormItemLayout = {
 const ResetPasswordPage = () => {
   const history = useHistory();
 
+  const showPasswordResetToast = () => {
+    notification.success({
+      message: "Password Reset",
+      description: "Your password is reset successfully! Please login"
+    });
+  };
+
   return (
     <Formik
       initialValues={{
@@ -48,6 +55,8 @@ const ResetPasswordPage = () => {
       onSubmit={(values, { setSubmitting }) => {
         console.log("Password is reset:", values);
         setSubmitting(false);
+
+        showPasswordResetToast();
 
         history.push("/login");
       }}
