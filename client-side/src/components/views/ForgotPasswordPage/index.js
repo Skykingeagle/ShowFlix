@@ -10,7 +10,10 @@ import { USER_SERVER } from "../../Config";
 const ForgotPasswordPage = () => {
   const history = useHistory();
   const [isOTPSent, setIsOTPSent] = useState(false);
-  const [userOTP, setUserOTP] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    otp: ""
+  });
 
   useEffect(() => {
     if (isOTPSent) {
@@ -33,11 +36,16 @@ const ForgotPasswordPage = () => {
           .required("OTP is required")
       })}
       onSubmit={(values, { setSubmitting }) => {
-        if (values.otp === userOTP) {
-          console.log("OTP Confirmed", values);
+        if (values.otp === user.otp) {
+          console.info("OTP Confirmed", values);
           setSubmitting(false);
 
-          history.push("/login/reset");
+          history.push({
+            pathname: "/login/reset",
+            state: {
+              userEmail: user.email
+            }
+          });
         }
       }}
     >
@@ -105,8 +113,10 @@ const ForgotPasswordPage = () => {
             email: values.email
           })
           .then((res) => {
-            console.info(res?.data?.OTP);
-            setUserOTP(res?.data?.OTP);
+            setUser({
+              email: values.email,
+              otp: res?.data?.OTP
+            });
             setIsOTPSent(true);
           })
           .catch((e) => {

@@ -4,6 +4,9 @@ import React, { useEffect } from "react";
 import Title from "antd/lib/typography/Title";
 import { Button, Form, Input, notification } from "antd";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { USER_SERVER } from "../../Config";
 
 const formItemLayout = {
   labelCol: {
@@ -30,6 +33,7 @@ const tailFormItemLayout = {
 
 const ResetPasswordPage = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const showPasswordResetToast = () => {
     notification.success({
@@ -53,12 +57,26 @@ const ResetPasswordPage = () => {
           .required("Confirm Password is required")
       })}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("Password is reset:", values);
-        setSubmitting(false);
-
-        showPasswordResetToast();
-
-        history.push("/login");
+        axios
+          .put(`${USER_SERVER}/changePass`, {
+            email: location.state.userEmail,
+            password: values.password
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              console.info("Password is reset:", values);
+              showPasswordResetToast();
+              history.push("/login");
+            } else {
+              console.error(res);
+            }
+          })
+          .catch((e) => {
+            console.error(e);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
     >
       {({
