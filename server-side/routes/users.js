@@ -72,37 +72,51 @@ router.get("/logout", auth, (req, res) => {
   );
 });
 
+// To getOTP to a valid user
 router.post('/getOTP', async (req, res) => {
   try {
+    // To check a this email is present in database or not
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
+      // If user Not exist send message Wrong Credential
       res.status(400).json({ success: false, message: 'Wrong credential' })
     }
+
+    // To generate OTP 
     const OTP = otpGenerator.generate(6, {
       upperCaseAlphabets: true,
       specialChars: true,
     });
+
+    // To Send a email to the user
     nodemailer.sendConfirmationEmail(req.body.email, req.body.email, OTP);
+
+    // Get OTP to check with the user
     res.status(200).send({ success: true, OTP });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Some error' })
   }
 })
 
+
 router.put('/changePass', async (req, res) => {
   try {
+
+    // To check a this email is present in database or not
     let user = await User.findOne({ email: req.body.email });
     if (!user) {
       res.status(400).json({ success: false, message: 'Wrong credential' })
     }
     user.password = req.body.password
+
+    // To hash the user password or to secure the user password
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(user.password, salt, async(err, hash) =>{
         if(err){
           res.status(400).json({ success: false, message: err })
         }
         user = await User.findOneAndUpdate({ email: req.body.email }, { $set: { password: hash } });
-        return res.status(200).json({success:true, pass: user.password})
+        return res.status(200).json({success:true, message: "Password has changed successfully"})
       });
     });
   } catch (err) {

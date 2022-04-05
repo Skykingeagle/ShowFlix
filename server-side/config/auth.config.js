@@ -1,6 +1,6 @@
 module.exports = {
     secret: 'bezkoder-secret-key',
-    admin: 'host@email.com',  // host email id
-    pass: 'hostPass',  // host password
-    JWT_SECRET: 'hostSec',  // host Secret
+    admin: 'showflixofficial6263@gmail.com',  // host email id
+    pass: 'Showflix6263',  // host password
+    JWT_SECRET: 'secretToken',  // host Secret
 };
