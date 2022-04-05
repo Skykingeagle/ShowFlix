@@ -1,13 +1,16 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Title from "antd/lib/typography/Title";
 import { Button, Form, Icon, Input, notification } from "antd";
 import { useHistory } from "react-router-dom";
+import { USER_SERVER } from "../../Config";
 
 const ForgotPasswordPage = () => {
   const history = useHistory();
   const [isOTPSent, setIsOTPSent] = useState(false);
+  const [userOTP, setUserOTP] = useState("");
 
   useEffect(() => {
     if (isOTPSent) {
@@ -26,14 +29,16 @@ const ForgotPasswordPage = () => {
       }}
       validationSchema={Yup.object().shape({
         otp: Yup.string()
-          .length(4, "Max length of OTP is 4")
+          .length(6, "Max length of OTP is 6")
           .required("OTP is required")
       })}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("OTP Confirmed", values);
-        setSubmitting(false);
+        if (values.otp === userOTP) {
+          console.log("OTP Confirmed", values);
+          setSubmitting(false);
 
-        history.push("/login/reset");
+          history.push("/login/reset");
+        }
       }}
     >
       {({
@@ -94,9 +99,22 @@ const ForgotPasswordPage = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         console.log("OTP sent to:", values);
-        setSubmitting(false);
 
-        setIsOTPSent(true);
+        axios
+          .post(`${USER_SERVER}/getOTP`, {
+            email: values.email
+          })
+          .then((res) => {
+            console.info(res?.data?.OTP);
+            setUserOTP(res?.data?.OTP);
+            setIsOTPSent(true);
+          })
+          .catch((e) => {
+            console.error(e);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
     >
       {({
